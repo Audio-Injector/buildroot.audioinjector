@@ -1,0 +1,4 @@
+menu "Packages"
+source "$BR2_EXTERNAL_CUSTOM_RADXA_ZEROW_PATH/package/libsox/Config.in"
+source "$BR2_EXTERNAL_CUSTOM_RADXA_ZEROW_PATH/package/gtkiostream/Config.in"
+endmenu
