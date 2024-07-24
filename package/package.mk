@@ -1,1 +1,1 @@
-include $(sort $(wildcard $(BR2_EXTERNAL_RK3308_PATH)/package/*/*.mk))
+include $(sort $(wildcard $(BR2_EXTERNAL_CUSTOM_RADXA_ZEROW_PATH)/package/*/*.mk))

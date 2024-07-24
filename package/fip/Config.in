@@ -1,0 +1,10 @@
+config BR2_PACKAGE_FIP
+        bool "fip"
+	select BR2_PACKAGE_UBOOT
+        help
+		Amlogic Firmware In Package - Prebuilt binaries/tools to pack Amlogic bootloader package
+
+       		https://github.com/radxa/fip
+
+comment "This package needs uboot!"
+	depends on !BR2_PACKAGE_UBOOT
