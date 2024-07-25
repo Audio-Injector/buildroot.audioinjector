@@ -18,4 +18,8 @@ define FIP_BUILD_CMDS
 	make -C $(BUILD_DIR)/fip-$(FIP_VERSION)/radxa-zero/
 endef
 
+define FIP_INSTALL_TARGET_CMDS
+	cp $(BUILD_DIR)/fip-$(FIP_VERSION)/radxa-zero/u-boot.bin.sd.bin $(BINARIES_DIR)/u-boot.bin
+endef
+
 $(eval $(generic-package))

@@ -1,41 +1,17 @@
 #!/bin/dash
 
-RKBIN=$BINARIES_DIR/rkbin
-RKCHIP_LOADER=$2
-RKCHIP=$2
-
 # copy uboot variable file over
-cp -a $CUSTOM_RADXA_ZEROW_RK3308_PATH/board/S905Y2/vars.txt $BINARIES_DIR/
-
-# copy overlays over
-linuxDir=`find $BASE_DIR/build -name 'vmlinux' -type f | xargs dirname`
-# mkdir -p $BINARIES_DIR/rockchip/overlays
-# if [ -d ${linuxDir}/arch/arm64/boot/dts/rockchip/overlay ]; then
-#   cp -a ${linuxDir}/arch/arm64/boot/dts/rockchip/overlay/*.dtbo $BINARIES_DIR/rockchip/overlays
-# fi
-
-ubootName=`find $BASE_DIR/build -name 'uboot-*' -type d`
-boardDir=`dirname $_`
-
-echo creating uboot.img
-currentDir=`pwd`
-cd $ubootName; ./make.sh;
-cd $currentDir
-cp $ubootName/uboot.img $BINARIES_DIR/u-boot.itb
-
-# to take rockchip-bsp's boot loaders, rather then generating our own ...
-echo creating idbloader.img
-$ubootName/tools/mkimage -n s905y2 -T rksd -d $RKBIN/bin/rk35/rk3566_ddr_1056MHz_v1.08.bin:$ubootName/spl/u-boot-spl.bin $BINARIES_DIR/idbloader.img
-
-# TODO: find out where this rk3566_ddr_1056MHz_v1.08.bin comes from and where to get something similar for this chipset.
+cp -a $BR2_EXTERNAL_CUSTOM_RADXA_ZEROW_PATH/board/S905Y2/vars.txt $BINARIES_DIR/
 
 # Generate the uboot script
 echo creating boot.scr
-$HOST_DIR/bin/mkimage -C none -A arm -T script -a 0x00c00000 -e 0x00c00000 -n 'flatmax load script' -d $CUSTOM_RADXA_ZEROW_RK3308_PATH/board/S905Y2/boot.cmd $BINARIES_DIR/boot.scr
+$HOST_DIR/bin/mkimage -C none -A arm -T script -a 0x00c00000 -e 0x00c00000 -n 'flatmax load script' -d $BR2_EXTERNAL_CUSTOM_RADXA_ZEROW_PATH/board/S905Y2/boot.cmd $BINARIES_DIR/boot.scr
 
 # Put the device trees into the correct location
-mkdir -p $BINARIES_DIR/rockchip; cp -a $BINARIES_DIR/*.dtb $BINARIES_DIR/rockchip
-$BASE_DIR/../support/scripts/genimage.sh -c $CUSTOM_RADXA_ZEROW_RK3308_PATH/board/RK3566.cm3/genimage.cfg
+mkdir -p $BINARIES_DIR/amlogic; cp -a $BINARIES_DIR/*.dtb $BINARIES_DIR/amlogic
+
+# Generation of the SD bootable image
+$BASE_DIR/../support/scripts/genimage.sh -c $BR2_EXTERNAL_CUSTOM_RADXA_ZEROW_PATH/board/S905Y2/genimage.cfg
 
 echo
 echo

@@ -15,7 +15,7 @@ fdt addr ${fdt_addr_r}
 fdt resize 65536
 for overlay_file in ${overlays}; do
   echo "loading overlay ${overlay_file}"
-	if fatload mmc ${devnum}:${distro_bootpart} ${load_addr} rockchip/overlays/${overlay_file}.dtbo; then
+	if fatload mmc ${devnum}:${distro_bootpart} ${load_addr} amlogic/overlays/${overlay_file}.dtbo; then
 		echo "Applying kernel provided DT overlay ${overlay_file}.dtbo"
 		fdt apply ${load_addr} || setenv overlay_error "true"
 	fi
