@@ -38,11 +38,11 @@ else
     echo "###### DON'T EDIT THIS FILE, EDIT $DEFCONFIG INSTEAD"
     cat $BR_REPO_PATH/configs/$BR_DEFCONFIG >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     cat $CUSTOM_PATH/configs/$DEFCONFIG >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    make CUSTOM_RADXA_ZEROW=$CUSTOM_PATH $BR_DEFCONFIG
+    make CUSTOM_AUDIO_INJECTOR=$CUSTOM_PATH $BR_DEFCONFIG
   else
     echo No original defconfig defined, no problem using $DEFCONFIG
     cp $CUSTOM_PATH/configs/$DEFCONFIG $BR_REPO_PATH/configs/$DEFCONFIG
-    echo 'name: CUSTOM_RADXA_ZEROW' > external.desc
+    echo 'name: CUSTOM_AUDIO_INJECTOR' > external.desc
     make BR2_EXTERNAL=$CUSTOM_PATH $DEFCONFIG
   fi
 fi

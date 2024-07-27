@@ -1,1 +1,1 @@
-source "$BR2_EXTERNAL_CUSTOM_RADXA_ZEROW_PATH/package/Config.in"
+source "$BR2_EXTERNAL_CUSTOM_AUDIO_INJECTOR_PATH/package/Config.in"
